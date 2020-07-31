@@ -1,5 +1,6 @@
 package com.unisinsight.demo.controller;
 
+import com.unisinsight.demo.support.lock.impl.CasLock;
 import com.unisinsight.demo.support.lock.impl.RedisLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -27,7 +28,6 @@ public class RedisTestController {
 
     @PostMapping
     public void test(){
-
 //        Lock lock = redisLock.crateLock("testPttl");
 //        lock.lock();
 //
@@ -42,36 +42,33 @@ public class RedisTestController {
 //            e.printStackTrace();
 //        }
 //        lock.unlock();
-        for (int j = 0 ;j < 1000 ; j ++) {
-            long start = System.currentTimeMillis();
-            sum  = 0;
-            CountDownLatch countDownLatch = new CountDownLatch(20);
-            for (int i = 0; i < 2 ; i++) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        Lock lock = redisLock.crateLock("sum");
-                        lock.lock();
+        CasLock lock = new CasLock();
+        sum  = 0;
+        CountDownLatch countDownLatch = new CountDownLatch(20);
+        for (int i = 0; i < 20 ; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    lock.lock();
 //                        synchronized (RedisTestController.class) {
-                            for (int i=0; i < 100000 ; i ++) {
-                                sum ++;
-                            }
+                        for (int i=0; i < 100000 ; i ++) {
+                            sum ++;
+                        }
 //                        }
-                        lock.unlock();
-                        countDownLatch.countDown();
-                    }
-                }).start();
-            }
-
-            try {
-                countDownLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("次数：" + j +  " sum:"+ sum + " time:" + (System.currentTimeMillis() - start));
+                    lock.unlock();
+                    countDownLatch.countDown();
+                }
+            }).start();
         }
+//
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("sum:"+ sum);
     }
 
     @GetMapping(value = "/{key}/{param}/{value}")

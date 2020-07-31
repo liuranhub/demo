@@ -1,6 +1,10 @@
 package com.unisinsight.demo.vos;
 
+import com.unisinsight.demo.service.PersonService;
+
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.UUID;
 
 public class Person {
     private String id;
@@ -8,6 +12,18 @@ public class Person {
     private Date birthday;
     private String identify;
     private String type;
+
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", identify='" + identify + '\'' +
+                ", type='" + type + '\'' +
+                '}' + '\n';
+    }
 
     public String getId() {
         return id;

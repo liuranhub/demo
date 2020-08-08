@@ -69,19 +69,19 @@ public class SearchEmptyNoService {
     }
 
     private static String formatNo(Integer no){
-        String format = "Order2020-00000000";
+        String format = prefix + "00000000";
         String noStr = no.toString();
 
         return format.substring(0, format.length() - noStr.length()) + noStr;
     }
 
     public List<String> search(int startIndex, int endIndex, int threadSize){
-        final List<String> orders = new ArrayList<>();
+        final List<String> result = new ArrayList<>();
         CountDownLatch countDownLatch = new CountDownLatch(threadSize);
 
         for (Query query : slices(startIndex, endIndex, threadSize)) {
             executorService.submit(()->{
-                count(query.start, query.end, orders);
+                count(query.start, query.end, result);
                 countDownLatch.countDown();
             });
         }
@@ -92,7 +92,7 @@ public class SearchEmptyNoService {
             e.printStackTrace();
         }
 
-        return orders;
+        return result;
     }
 
     private List<Query> slices(int startIndex, int endIndex, int threadSize) {
@@ -119,7 +119,7 @@ public class SearchEmptyNoService {
         }
 
         if (end - start == 1){
-            orders.add(prefix + end);
+            orders.add(formatNo(end));
             return;
         }
 
@@ -129,7 +129,7 @@ public class SearchEmptyNoService {
     }
 
     private Integer countSql(int start, int end) {
-        String[] args = new String[]{prefix + start, prefix + end};
+        String[] args = new String[]{formatNo(start), formatNo(end)};
         return jdbcTemplate.queryForObject(COUNT_SQL, args, Integer.class);
     }
 

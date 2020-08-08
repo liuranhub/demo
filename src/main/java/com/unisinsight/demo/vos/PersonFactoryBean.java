@@ -9,7 +9,7 @@ public class PersonFactoryBean implements FactoryBean<Person> {
     @Nullable
     @Override
     public Person getObject() throws Exception {
-        return new Person("test");
+        return new Person();
     }
 
     @Nullable

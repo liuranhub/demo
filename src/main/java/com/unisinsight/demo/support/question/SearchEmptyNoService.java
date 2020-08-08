@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+/**
+ * 快速找到数据库中丢失编号
+ * */
 @Component
 public class SearchEmptyNoService {
     private final static String COUNT_SQL =

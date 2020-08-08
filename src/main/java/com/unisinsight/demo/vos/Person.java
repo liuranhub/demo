@@ -1,35 +1,26 @@
 package com.unisinsight.demo.vos;
 
-import com.unisinsight.demo.service.PersonService;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.annotation.Resource;
-import java.util.Date;
-import java.util.UUID;
-
+@Entity
+@Table(name = "tb_person")
 public class Person {
-    private String id;
+    @Id
+    private Integer id;
     private String name;
-    private Date birthday;
-    private String identify;
-    private String type;
+    private String age;
+    private String school;
+    private String phone;
+    private String password;
+    private String address;
 
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", birthday=" + birthday +
-                ", identify='" + identify + '\'' +
-                ", type='" + type + '\'' +
-                '}' + '\n';
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,27 +32,43 @@ public class Person {
         this.name = name;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getAge() {
+        return age;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public String getIdentify() {
-        return identify;
+    public String getSchool() {
+        return school;
     }
 
-    public void setIdentify(String identify) {
-        this.identify = identify;
+    public void setSchool(String school) {
+        this.school = school;
     }
 
-    public String getType() {
-        return type;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

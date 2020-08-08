@@ -1,31 +1,21 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.service.DynamicService;
-import com.unisinsight.demo.service.PersonService;
-import com.unisinsight.demo.support.event.PersonEvent;
-import com.unisinsight.demo.vos.Person;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import com.unisinsight.demo.support.question.SearchEmptyNoService;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("person")
 public class PersonController {
     @Resource
-    private PersonService personService;
-    @Resource
-    private ApplicationContext applicationContext;
+    private DefaultListableBeanFactory beanFactory;
 
     @Resource
-    private DefaultListableBeanFactory beanFactory;
+    private SearchEmptyNoService searchService;
 
     @GetMapping("create")
     public void createDynamicService(){
@@ -40,4 +30,22 @@ public class PersonController {
         dynamicService.doing();
     }
 
+
+    @GetMapping("search/{slices}")
+    public void search(@PathVariable Integer slices){
+        long start = System.currentTimeMillis();
+        int base = 1000000;
+        List<String> orders = searchService.search(base, base * 2, slices);
+        for (String val : orders) {
+            System.out.println(val);
+        }
+
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+
+    @PostMapping("init")
+    public void initData(){
+        searchService.initData(0, 2000000);
+    }
 }

@@ -1,5 +1,6 @@
 package com.unisinsight.demo;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
@@ -14,21 +15,7 @@ import java.util.stream.Stream;
 @EnableAspectJAutoProxy
 public class Application {
     public static void main(String[] args) {
-//        new SpringApplication(Application.class).run();
-
-        System.out.println(ip2Int("254.255.255.1"));
-
-        System.out.println();
-
-        long[] ipaddr = {1, 255, 255, 254};
-
-        long ipInt = ipToInt(ipaddr);
-        System.out.println(ipInt);
-
-        for (long val : intToIp(ipInt)){
-            System.out.printf(val + ",".toUpperCase());
-        }
-        System.out.println();
+        SpringApplication.run(Application.class);
     }
 
     public static int ip2Int(String ip) {

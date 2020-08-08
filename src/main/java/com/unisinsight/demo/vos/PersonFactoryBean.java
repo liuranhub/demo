@@ -1,0 +1,25 @@
+package com.unisinsight.demo.vos;
+
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PersonFactoryBean implements FactoryBean<Person> {
+    @Nullable
+    @Override
+    public Person getObject() throws Exception {
+        return new Person("test");
+    }
+
+    @Nullable
+    @Override
+    public Class<?> getObjectType() {
+        return Person.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
+}

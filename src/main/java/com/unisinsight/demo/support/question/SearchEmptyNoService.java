@@ -98,14 +98,14 @@ public class SearchEmptyNoService {
         return result;
     }
 
-    private List<Query> slices(int startIndex, int endIndex, int threadSize) {
+    private List<Query> slices(int startIndex, int endIndex, int size) {
         List<Query> result = new ArrayList<>();
-        int step = (endIndex - startIndex) / threadSize;
+        int step = (endIndex - startIndex) / size;
         int start = startIndex;
-        for (int index = 0; index < threadSize ;index ++) {
+        for (int index = 0; index < size ;index ++) {
             Query query = new Query();
             query.start = start;
-            if (index == threadSize -1) {
+            if (index == size -1) {
                 query.end = endIndex;
             } else {
                 query.end = query.start + step;

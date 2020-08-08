@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7eb7114d-654f-4705-982f-ed849cebe659" name="Default" comment="Merge branch 'master' of https://github.com/lr635934333/demo&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/workspace.xml">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="7eb7114d-654f-4705-982f-ed849cebe659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unisinsight/demo/vos/PersonFactoryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unisinsight/demo/vos/PersonFactoryBean.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="SearchEmptyNoService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+            <state relative-caret-position="126">
+              <caret line="87" column="43" lean-forward="true" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -400,7 +397,7 @@
       <workItem from="1595830303718" duration="35722000" />
       <workItem from="1596854918522" duration="14026000" />
       <workItem from="1596876467261" duration="59000" />
-      <workItem from="1596876549011" duration="384000" />
+      <workItem from="1596876549011" duration="1368000" />
     </task>
     <task id="LOCAL-00001" summary="cache">
       <created>1596190537206</created>
@@ -423,15 +420,28 @@
       <option name="project" value="LOCAL" />
       <updated>1596874865803</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Merge branch 'master' of https://github.com/lr635934333/demo&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/workspace.xml">
+      <created>1596877078450</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596877078450</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Merge branch 'master' of https://github.com/lr635934333/demo&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/workspace.xml">
+      <created>1596877198663</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596877198663</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="442989000" />
+    <option name="totallyTimeSpent" value="443973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="2" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -444,7 +454,7 @@
       <window_info anchor="right" id="Structure" order="10" sideWeight="0.45864663" side_tool="true" visible="true" weight="0.22943445" />
       <window_info anchor="right" id="Ant Build" order="1" show_stripe_button="false" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.11500701" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.19214587" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.32819074" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -455,7 +465,7 @@
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.31478968" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.0806271" />
-      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.5820477" visible="true" weight="0.21015424" />
+      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.5820477" visible="true" weight="0.16645244" />
       <window_info anchor="right" id="Bean Validation" order="9" show_stripe_button="false" weight="0.32995737" />
       <window_info id="Web" order="5" side_tool="true" />
       <window_info anchor="bottom" id="JProfiler" order="1" />
@@ -518,20 +528,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java</url>
-          <line>116</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java</url>
-          <line>132</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="5" />
     </breakpoint-manager>
   </component>
@@ -988,8 +984,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/unisinsight/demo/support/question/SearchEmptyNoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+        <state relative-caret-position="126">
+          <caret line="87" column="43" lean-forward="true" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

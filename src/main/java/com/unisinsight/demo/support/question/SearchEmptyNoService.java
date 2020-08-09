@@ -67,6 +67,7 @@ public class SearchEmptyNoService {
                         e.printStackTrace();
                     }
                 }
+                return ;
             });
         }
     }
@@ -127,8 +128,23 @@ public class SearchEmptyNoService {
         }
 
         int mid = (start + end) / 2;
-        count(start, mid, orders);
-        count(mid, end, orders);
+
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        executorService.submit(()->{
+            count(start, mid, orders);
+            countDownLatch.countDown();
+        });
+
+        executorService.submit(()->{
+            count(mid, end, orders);
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private Integer countSql(int start, int end) {

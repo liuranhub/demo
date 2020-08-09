@@ -1,6 +1,5 @@
-.DS_Store
-~*
-*.asta.lock
-.idea
-*.log
+# Created by .ignore support plugin (hsz.mobi)
 target
+.idea
+*.iml
+

@@ -27,11 +27,12 @@ public class SearchEmptyNoService {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(65);
+    private ExecutorService executorService = Executors.newFixedThreadPool(64);
 
-    private BlockingQueue<Person> blockingQueue = new ArrayBlockingQueue<>(256);
 
     public void initData(int start, int end){
+        BlockingQueue<Person> blockingQueue = new ArrayBlockingQueue<>(256);
+
         Future producer = executorService.submit(()->{
             for (int i=start ;i <= end ;i ++) {
                 Person person = new Person();
@@ -52,7 +53,7 @@ public class SearchEmptyNoService {
 
         });
 
-        for (int i = 0 ; i < 64; i ++) {
+        for (int i = 0 ; i < 32; i ++) {
             executorService.submit(() -> {
                 while (true) {
                     if (producer.isDone() && blockingQueue.isEmpty()) {
@@ -67,15 +68,9 @@ public class SearchEmptyNoService {
                         e.printStackTrace();
                     }
                 }
+                return ;
             });
         }
-    }
-
-    private static String formatNo(Integer no){
-        String format = prefix + "00000000";
-        String noStr = no.toString();
-
-        return format.substring(0, format.length() - noStr.length()) + noStr;
     }
 
     public List<String> search(int startIndex, int endIndex, int threadSize){
@@ -96,6 +91,13 @@ public class SearchEmptyNoService {
         }
 
         return result;
+    }
+
+    private static String formatNo(Integer no){
+        String format = prefix + "00000000";
+        String noStr = no.toString();
+
+        return format.substring(0, format.length() - noStr.length()) + noStr;
     }
 
     private List<Query> slices(int startIndex, int endIndex, int size) {
@@ -127,8 +129,24 @@ public class SearchEmptyNoService {
         }
 
         int mid = (start + end) / 2;
-        count(start, mid, orders);
-        count(mid, end, orders);
+
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        executorService.submit(()->{
+            count(start, mid, orders);
+            countDownLatch.countDown();
+        });
+
+        executorService.submit(()->{
+            count(mid, end, orders);
+            countDownLatch.countDown();
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private Integer countSql(int start, int end) {

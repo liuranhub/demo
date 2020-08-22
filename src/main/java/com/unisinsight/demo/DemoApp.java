@@ -17,17 +17,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SpringBootApplication
-@ComponentScan(basePackages = "com.unisinsight.*")
+//@SpringBootApplication
+//@ComponentScan(basePackages = "com.unisinsight.*")
 public class DemoApp {
     private static ApplicationContext applicationContext;
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-
-        applicationContext = SpringApplication.run(DemoApp.class, args);
-
-//        Person person = new Person("test");
-//        invokeAllGetMethod(person);
-    }
+//    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+//
+//        applicationContext = SpringApplication.run(DemoApp.class, args);
+//
+////        Person person = new Person("test");
+////        invokeAllGetMethod(person);
+//    }
 
     public static ApplicationContext applicationContext(){
         return applicationContext;

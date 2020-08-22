@@ -34,8 +34,7 @@ public class PersonController {
     @GetMapping("search/{slices}")
     public void search(@PathVariable Integer slices){
         long start = System.currentTimeMillis();
-        int base = 1000000;
-        List<String> orders = searchService.search(base, base * 2, slices);
+        List<String> orders = searchService.search(0, 5000000, slices);
         for (String val : orders) {
             System.out.println(val);
         }
@@ -46,6 +45,6 @@ public class PersonController {
 
     @PostMapping("init")
     public void initData(){
-        searchService.initData(0, 2000000);
+        searchService.initData(2000001, 5000000);
     }
 }

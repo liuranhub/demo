@@ -119,7 +119,7 @@ public class SearchEmptyNoService {
     }
 
     private void count(int start, int end, List<String> orders) {
-        if (countSql(start, end) ==(end - start)) {
+        if (countSql(start, end) >=(end - start)) {
             return;
         }
 

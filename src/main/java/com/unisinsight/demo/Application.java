@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,7 +17,9 @@ import java.util.stream.Stream;
 @EnableAspectJAutoProxy
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class);
+//        SpringApplication.run(Application.class);
+        Supplier<Long> val =  memoize(()->90L);
+//        val.get()
     }
 
     public static int ip2Int(String ip) {
@@ -42,6 +46,24 @@ public class Application {
         result[2] = ((ip >> 8) & 0Xff);
         result[3] = (ip & 0Xff);
         return result;
+    }
+
+
+    public static <T> Supplier<T> memoize(Supplier<T> delegate) {
+        AtomicReference<T> value = new AtomicReference<>();
+        return () -> {
+            T val = value.get();
+            if (val == null) {
+                synchronized(value) {
+                    val = value.get();
+                    if (val == null) {
+                        val = Objects.requireNonNull(delegate.get());
+                        value.set(val);
+                    }
+                }
+            }
+            return val;
+        };
     }
 
     public static Map<Boolean, List<InvokeResult>>  invokeAllGetMethod(final Object obj){

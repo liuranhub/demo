@@ -1,14 +1,17 @@
 package com.unisinsight.demo.vos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_person")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Person {
     @Id
-    private Integer id;
+    private String id;
     private String name;
     private String age;
     private String school;
@@ -16,11 +19,11 @@ public class Person {
     private String password;
     private String address;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

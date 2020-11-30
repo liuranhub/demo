@@ -1,44 +1,25 @@
 package com.unisinsight.demo.service;
 
+import com.unisinsight.demo.repository.PersonRepository;
 import com.unisinsight.demo.vos.Person;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 @Service
-public class PersonServiceImpl extends AbstractPersonService {
+public class PersonServiceImpl implements PersonService {
 
-    @PostConstruct
-    public void test(){
-        System.out.println("yyy");
+    @Resource
+    private PersonRepository personRepository;
+
+
+    @Override
+    public Person get(String id) {
+        return personRepository.getOne(id);
     }
 
     @Override
-    Person saveBefore(Person person) {
-        // todo
-        return person;
-    }
-
-    @Override
-    Person saveAfter(Person person) {
-        // todo
-        return person;
-    }
-
-    @Override
-    Person updateBefore(Person person) {
-        // todo
-        return person;
-    }
-
-    @Override
-    Person updateAfter(Person person) {
-        // todo
-        return person;
-    }
-
-    @Override
-    public void doing() {
-        System.out.println("dynamic inject");
+    public Person save(Person person) {
+        return personRepository.save(person);
     }
 }

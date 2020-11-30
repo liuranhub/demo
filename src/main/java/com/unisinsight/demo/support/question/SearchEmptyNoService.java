@@ -36,7 +36,7 @@ public class SearchEmptyNoService {
         Future producer = executorService.submit(()->{
             for (int i=start ;i <= end ;i ++) {
                 Person person = new Person();
-                person.setId(i);
+                person.setId(UUID.randomUUID().toString());
                 person.setName(UUID.randomUUID().toString());
                 person.setAddress(UUID.randomUUID().toString());
                 person.setAge(UUID.randomUUID().toString());

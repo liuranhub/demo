@@ -1,35 +1,42 @@
 package com.unisinsight.demo.controller;
 
-import com.unisinsight.demo.service.DynamicService;
+import com.unisinsight.demo.service.PersonService;
 import com.unisinsight.demo.support.question.SearchEmptyNoService;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import com.unisinsight.demo.vos.Person;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("person")
 public class PersonController {
-    @Resource
-    private DefaultListableBeanFactory beanFactory;
 
     @Resource
     private SearchEmptyNoService searchService;
 
-    @GetMapping("create")
-    public void createDynamicService(){
-        beanFactory.registerSingleton(DynamicService.class.getName(),
-                beanFactory.createBean(DynamicService.class, 2, true) );
+    @Resource
+    private PersonService personService;
+
+    @GetMapping("{id}")
+    public Person get(@PathVariable String id){
+       return personService.get(id);
     }
 
-    @GetMapping("publish")
-    public void test() {
-        DynamicService dynamicService = beanFactory
-                .getBean(DynamicService.class.getName(), DynamicService.class);
-        dynamicService.doing();
-    }
 
+    @PostMapping
+    public Person save(){
+        Person person = new Person();
+        person.setId(UUID.randomUUID().toString());
+        person.setName(UUID.randomUUID().toString());
+        person.setAddress(UUID.randomUUID().toString());
+        person.setAge(UUID.randomUUID().toString());
+        person.setPassword(UUID.randomUUID().toString());
+        person.setSchool(UUID.randomUUID().toString());
+
+        return personService.save(person);
+    }
 
     @GetMapping("search/{slices}")
     public void search(@PathVariable Integer slices){

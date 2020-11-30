@@ -17,8 +17,8 @@ import java.util.stream.Stream;
 @EnableAspectJAutoProxy
 public class Application {
     public static void main(String[] args) {
-//        SpringApplication.run(Application.class);
-        Supplier<Long> val =  memoize(()->90L);
+        SpringApplication.run(Application.class);
+//        Supplier<Long> val =  memoize(()->90L);
 //        val.get()
     }
 

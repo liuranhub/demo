@@ -16,7 +16,7 @@ public class TestAop {
 
     @Before("BrokerAspect()")
     public void doBeforeGame(){
-        System.out.println("test aop");
+//        System.out.println("test aop");
     }
 
 }

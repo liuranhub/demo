@@ -1,5 +1,7 @@
 package com.unisinsight.demo;
 
+import com.alibaba.fastjson.JSON;
+import com.unisinsight.demo.support.FileToJson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -18,6 +20,9 @@ import java.util.stream.Stream;
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
+
+//        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
+//        String json = JSON.toJSONString(root);
 //        Supplier<Long> val =  memoize(()->90L);
 //        val.get()
     }

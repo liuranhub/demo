@@ -1,6 +1,8 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.service.PersonService;
+import com.unisinsight.demo.support.FileToJson;
+import com.unisinsight.demo.support.TreeNode;
 import com.unisinsight.demo.support.question.SearchEmptyNoService;
 import com.unisinsight.demo.vos.Person;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,15 @@ public class PersonController {
 
     @Resource
     private PersonService personService;
+
+    //        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
+//        String json = JSON.toJSONString(root);
+
+    @GetMapping("json")
+    public TreeNode toJson(){
+        return FileToJson.readFile("/Users/liuran/Desktop/test.json");
+//        String json = JSON.toJSONString(root);
+    }
 
     @GetMapping("{id}")
     public Person get(@PathVariable String id){

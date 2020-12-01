@@ -102,11 +102,18 @@ public class FileToJson {
         public String getId() {
             String id = ChineseToFirstCharUtil.getFirstSpell(name).toUpperCase();
 
-            if (getParent() != null && getParent() instanceof DefaultTreeNode ) {
-                id = ((DefaultTreeNode) getParent()).getId() + "_" + id;
+            if (getParentNode() != null && getParentNode() instanceof DefaultTreeNode ) {
+                id = ((DefaultTreeNode) getParentNode()).getId() + "_" + id;
             }
 
             return id;
+        }
+
+        public String getParent(){
+            if (getParentNode() != null && getParentNode() instanceof DefaultTreeNode) {
+                return ((DefaultTreeNode) getParentNode()).getId();
+            }
+            return null;
         }
 
         public void setName(String name) {

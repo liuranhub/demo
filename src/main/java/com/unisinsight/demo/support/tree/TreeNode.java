@@ -13,7 +13,7 @@ public abstract class TreeNode {
         this.content = content;
     }
 
-    protected TreeNode getParent() {
+    protected TreeNode getParentNode() {
         return parent;
     }
 

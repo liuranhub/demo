@@ -2,16 +2,20 @@ package com.unisinsight.demo.support;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.unisinsight.demo.support.tree.Line;
+import com.unisinsight.demo.support.tree.TreeNode;
+import com.unisinsight.demo.support.tree.TreeNodeFactory;
+import com.unisinsight.demo.support.tree.TreeUtils;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class FileToJson {
 
     public static void main(String[] args) {
-        TreeNode root = readFile("/Users/liuran/File/Temp/作战室.txt", "作战室");
+        TreeNode root = new FileToJson()
+                .readFile("/Users/liuran/File/Temp/作战室.txt", "作战室");
         ObjectMapper mapper = new ObjectMapper();
         String json = null;
         try {
@@ -23,7 +27,7 @@ public class FileToJson {
         System.out.println(json);
     }
 
-    public static TreeNode readFile(String fileName, String category){
+    public TreeNode readFile(String fileName, String category){
         File file = new File(fileName);
         List<Line> lines = new ArrayList<>();
         try {
@@ -32,8 +36,8 @@ public class FileToJson {
             try {
                 while ((str = reader.readLine()) != null) {
                     String name = str.trim();
-                    String perfix = str.substring(0, str.indexOf(name));
-                    int level = perfix.length() + 1;
+                    String prefix = str.substring(0, str.indexOf(name));
+                    int level = prefix.length() / 4 + 1;
                     Line line = new Line(name, level);
                     lines.add(line);
                 }
@@ -45,35 +49,72 @@ public class FileToJson {
             e.printStackTrace();
         }
 
-        TreeNode root = new TreeNode();
-        root.setCategory(category);
-        root.setName(category);
+        List<TreeNode> result = TreeUtils.linesToTree(lines, new DefaultFactory(category));
 
-        LinkedList<TreeNode> parentStack = new LinkedList<TreeNode>();
-        parentStack.push(root);
-
-        for (Line line : lines) {
-            TreeNode node = new TreeNode();
-            while (parentStack.size() > line.level){
-                parentStack.pop();
-            }
-            TreeNode parent = parentStack.peek();
-            parent.addNode(node);
-            node.setParent(parent);
-            node.setName(line.name);
-            node.setCategory(category);
-            parentStack.push(node);
-        }
-
-        return root;
+        return result.get(0);
     }
 
-    private static class Line{
+    private class DefaultFactory implements TreeNodeFactory{
+        private String category;
+        public DefaultFactory(String category) {
+            this.category = category;
+        }
+
+        @Override
+        public TreeNode create(TreeNode parent, String content) {
+
+            DefaultTreeNode treeNode = new DefaultTreeNode(parent, content);
+            treeNode.setCategory(category);
+            return treeNode;
+        }
+
+        @Override
+        public TreeNode create(String context) {
+            DefaultTreeNode treeNode =  new DefaultTreeNode(null, context);
+            treeNode.setCategory(category);
+            return treeNode;
+        }
+    }
+
+
+    private class DefaultTreeNode extends TreeNode {
         private String name;
-        private int level;
-        public Line(String name, int level){
+        private List<TreeNode> nodes = new ArrayList<>();
+        private String category;
+
+        public DefaultTreeNode(TreeNode parent, String content) {
+            super(parent, content);
+            this.name = content;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public List<TreeNode> getNodes() {
+            return nodes;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getId() {
+            String id = ChineseToFirstCharUtil.getFirstSpell(name).toUpperCase();
+
+            if (getParent() != null && getParent() instanceof DefaultTreeNode ) {
+                id = ((DefaultTreeNode) getParent()).getId() + "_" + id;
+            }
+
+            return id;
+        }
+
+        public void setName(String name) {
             this.name = name;
-            this.level = level;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 }

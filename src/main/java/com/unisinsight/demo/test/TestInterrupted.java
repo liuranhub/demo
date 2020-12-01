@@ -1,7 +1,5 @@
 package com.unisinsight.demo.test;
 
-import com.unisinsight.demo.support.tree.vo.Menu;
-import com.unisinsight.demo.support.tree.vo.TestEnum;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -27,24 +25,12 @@ public class TestInterrupted {
 
     @Test
     public void testInnerClass(){
-        Menu menu = new Menu();
-        menu.setMenuCode("tttt");
-        menu.setLength(12);
-        try {
-            Menu clone = menu.clone();
-            clone.setMenuCode("zzz");
-            clone.updateValue(2,111);
 
-            System.out.println(clone.getMenuCode());
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
     public void testEnum(){
-        TestEnum.yyy y = new TestEnum.yyy();
-        executorService.submit(TestEnum.test);
+
     }
 
     @Test

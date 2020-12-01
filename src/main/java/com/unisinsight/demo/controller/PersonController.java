@@ -1,8 +1,6 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.service.PersonService;
-import com.unisinsight.demo.support.FileToJson;
-import com.unisinsight.demo.support.TreeNode;
 import com.unisinsight.demo.support.question.SearchEmptyNoService;
 import com.unisinsight.demo.vos.Person;
 import org.springframework.web.bind.annotation.*;

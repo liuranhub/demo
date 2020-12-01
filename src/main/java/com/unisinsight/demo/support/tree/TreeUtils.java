@@ -1,6 +1,5 @@
 package com.unisinsight.demo.support.tree;
 
-import com.unisinsight.demo.support.FileToJson;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.List;
 public class TreeUtils {
 
     /**
-     * 带层级的列表转换成树形结构
+     * 带层级的文本树转内存树
      * */
     public static List<TreeNode> linesToTree(List<Line> lines, TreeNodeFactory factory){
         if (CollectionUtils.isEmpty(lines)){
@@ -20,7 +19,7 @@ public class TreeUtils {
         List<TreeNode> result = new ArrayList<>();
         TreeNode root ;
         for (Line line : lines) {
-            while (parentStack.size() > line.getLevel()){
+            while (parentStack.size() >= line.getLevel()){
                 parentStack.pop();
             }
             TreeNode parent = parentStack.peek();
@@ -37,5 +36,4 @@ public class TreeUtils {
         }
         return result;
     }
-
 }

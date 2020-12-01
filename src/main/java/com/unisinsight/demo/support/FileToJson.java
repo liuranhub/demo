@@ -1,6 +1,5 @@
 package com.unisinsight.demo.support;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,7 +11,7 @@ import java.util.List;
 public class FileToJson {
 
     public static void main(String[] args) {
-        TreeNode root = readFile("/Users/liuran/File/Temp/作战室.txt");
+        TreeNode root = readFile("/Users/liuran/File/Temp/作战室.txt", "作战室");
         ObjectMapper mapper = new ObjectMapper();
         String json = null;
         try {
@@ -20,10 +19,11 @@ public class FileToJson {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         System.out.println(json);
     }
 
-    public static TreeNode readFile(String fileName){
+    public static TreeNode readFile(String fileName, String category){
         File file = new File(fileName);
         List<Line> lines = new ArrayList<>();
         try {
@@ -44,9 +44,6 @@ public class FileToJson {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        String category = "作战室";
-
 
         TreeNode root = new TreeNode();
         root.setCategory(category);
@@ -74,9 +71,6 @@ public class FileToJson {
     private static class Line{
         private String name;
         private int level;
-
-
-
         public Line(String name, int level){
             this.name = name;
             this.level = level;

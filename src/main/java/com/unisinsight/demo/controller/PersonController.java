@@ -24,12 +24,6 @@ public class PersonController {
     //        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
 //        String json = JSON.toJSONString(root);
 
-    @GetMapping("json")
-    public TreeNode toJson(){
-        return FileToJson.readFile("/Users/liuran/Desktop/test.json");
-//        String json = JSON.toJSONString(root);
-    }
-
     @GetMapping("{id}")
     public Person get(@PathVariable String id){
        return personService.get(id);

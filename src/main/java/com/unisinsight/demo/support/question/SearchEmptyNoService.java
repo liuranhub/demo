@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -35,16 +36,9 @@ public class SearchEmptyNoService {
 
         Future producer = executorService.submit(()->{
             for (int i=start ;i <= end ;i ++) {
-                Person person = new Person();
-                person.setId(UUID.randomUUID().toString());
-                person.setName(UUID.randomUUID().toString());
-                person.setAddress(UUID.randomUUID().toString());
-                person.setAge(UUID.randomUUID().toString());
-                person.setPassword(UUID.randomUUID().toString());
-                person.setSchool(UUID.randomUUID().toString());
-                person.setPhone(formatNo(i));
+
                 try {
-                    blockingQueue.put(person);
+                    blockingQueue.put(createPerson(i));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -91,6 +85,19 @@ public class SearchEmptyNoService {
         }
 
         return result;
+    }
+
+    private static Person createPerson(int i){
+        Person person = new Person();
+        person.setId(i);
+        person.setName(UUID.randomUUID().toString());
+        person.setAddress(UUID.randomUUID().toString());
+        person.setAge(new Random().nextInt(35));
+        person.setSchool(new Random().nextInt(100000) + "");
+        person.setNumber(formatNo(i));
+        person.setCreateTime(System.currentTimeMillis());
+
+        return person;
     }
 
     private static String formatNo(Integer no){

@@ -11,19 +11,27 @@ import javax.persistence.Table;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Person {
     @Id
-    private String id;
+    private Integer id;
     private String name;
-    private String age;
+    private Integer age;
     private String school;
-    private String phone;
-    private String password;
     private String address;
+    private String number;
+    private Long createTime;
 
-    public String getId() {
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,11 +43,11 @@ public class Person {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -51,20 +59,12 @@ public class Person {
         this.school = school;
     }
 
-    public String getPhone() {
-        return phone;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     public String getAddress() {

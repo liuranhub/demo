@@ -14,7 +14,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public Person get(String id) {
+    public Person get(Integer id) {
         return personRepository.getOne(id);
     }
 

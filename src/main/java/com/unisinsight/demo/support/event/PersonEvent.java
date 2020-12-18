@@ -1,8 +1,7 @@
 package com.unisinsight.demo.support.event;
 
-import com.unisinsight.demo.vos.Person;
+import com.unisinsight.demo.model.Person;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.event.EventListener;
 
 public class PersonEvent extends ApplicationEvent {
 

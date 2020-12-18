@@ -1,31 +1,24 @@
-package com.unisinsight.demo.vos;
+package com.unisinsight.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_person")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Person {
+public class Person extends Base {
+
     @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="tb_privilege_id_seq")
+    @SequenceGenerator(name="tb_privilege_id_seq",allocationSize = 1)
     private Integer id;
+    private Long createTime;
     private String name;
     private Integer age;
     private String school;
     private String address;
     private String number;
-    private Long createTime;
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public Integer getId() {
         return id;
@@ -33,6 +26,22 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -57,14 +66,6 @@ public class Person {
 
     public void setSchool(String school) {
         this.school = school;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
     }
 
     public String getAddress() {

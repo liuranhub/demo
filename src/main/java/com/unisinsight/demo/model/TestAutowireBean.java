@@ -1,4 +1,4 @@
-package com.unisinsight.demo.vos;
+package com.unisinsight.demo.model;
 
 import com.unisinsight.demo.service.PersonService;
 

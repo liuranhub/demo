@@ -1,11 +1,11 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.service.PersonService;
-import com.unisinsight.demo.support.question.SearchEmptyNoService;
+import com.unisinsight.demo.service.InitDataService;
 import com.unisinsight.demo.support.sort.BubbleSort;
 import com.unisinsight.demo.support.sort.QuickSort;
 import com.unisinsight.demo.support.sort.Sort;
-import com.unisinsight.demo.vos.Person;
+import com.unisinsight.demo.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +14,15 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("person")
 public class PersonController {
 
     @Resource
-    private SearchEmptyNoService searchService;
+    private InitDataService<Person> personInitDataService;
 
-    @Resource
+//    @Resource
     private PersonService personService;
 
     //        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
@@ -36,21 +35,9 @@ public class PersonController {
        return personService.get(id);
     }
 
-    @GetMapping("search/{slices}")
-    public void search(@PathVariable Integer slices){
-        long start = System.currentTimeMillis();
-        List<String> orders = searchService.search(0, 5000000, slices);
-        for (String val : orders) {
-            System.out.println(val);
-        }
-
-        System.out.println(System.currentTimeMillis() - start);
-    }
-
-
     @PostMapping("init/{start}/{end}")
     public void initData(@PathVariable Integer start, @PathVariable Integer end){
-        searchService.initData(start, end);
+        personInitDataService.initData(start, end);
     }
 
     @GetMapping("/invoke/sort/{type}/{size}")
@@ -75,5 +62,15 @@ public class PersonController {
 
         return new QuickSort();
     }
+
+    @GetMapping(value = "sleep")
+    public void sleep(){
+        try {
+            Thread.sleep(60 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

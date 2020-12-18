@@ -1,4 +1,4 @@
-package com.unisinsight.demo.vos;
+package com.unisinsight.demo.model;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.lang.Nullable;

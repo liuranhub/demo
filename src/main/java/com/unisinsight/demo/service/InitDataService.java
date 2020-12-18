@@ -1,5 +1,6 @@
 package com.unisinsight.demo.service;
 
+import com.unisinsight.demo.config.Constant;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class InitDataService<T> {
     @Resource
     private ModelCreateSave<T> modelCreateSave;
 
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(64);
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(Constant.INIT_THREADS * 2);
 
     public void initData(int start, int end){
         long startTime = System.currentTimeMillis();
@@ -39,7 +40,7 @@ public class InitDataService<T> {
             e.printStackTrace();
         }
 
-        for (int i = 0 ; i < 32; i ++) {
+        for (int i = 0; i < Constant.INIT_THREADS; i ++) {
             executorService.submit(() -> {
                 while (true) {
                     if (producer.isDone() && blockingQueue.isEmpty()) {

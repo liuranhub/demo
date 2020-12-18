@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.Random;
 import java.util.UUID;
 
-//@Service
+@Service
 public class PersonServiceImpl implements PersonService , ModelCreateSave<Person>{
 
     @Resource
@@ -22,7 +22,7 @@ public class PersonServiceImpl implements PersonService , ModelCreateSave<Person
 
     @Override
     public Person create(int index) {
-        return null;
+        return createPerson(index);
     }
 
     @Override

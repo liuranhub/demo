@@ -17,6 +17,7 @@ public class InitDataService<T> {
     private static final ExecutorService executorService = Executors.newFixedThreadPool(64);
 
     public void initData(int start, int end){
+        long startTime = System.currentTimeMillis();
         BlockingQueue<T> blockingQueue = new ArrayBlockingQueue<>(256);
 
         Future<?> producer = executorService.submit(()->{
@@ -32,11 +33,17 @@ public class InitDataService<T> {
 
         });
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         for (int i = 0 ; i < 32; i ++) {
             executorService.submit(() -> {
                 while (true) {
                     if (producer.isDone() && blockingQueue.isEmpty()) {
-                        System.out.println(Thread.currentThread().getName() + " finish");
+                        System.out.println("finish : " + (System.currentTimeMillis() - startTime));
                         break;
                     }
                     T t = null;

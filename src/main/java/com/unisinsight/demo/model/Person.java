@@ -10,8 +10,8 @@ import javax.persistence.*;
 public class Person extends Base {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="tb_privilege_id_seq")
-    @SequenceGenerator(name="tb_privilege_id_seq",allocationSize = 1)
+//    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="tb_privilege_id_seq")
+//    @SequenceGenerator(name="tb_privilege_id_seq",allocationSize = 1)
     private Integer id;
     private Long createTime;
     private String name;

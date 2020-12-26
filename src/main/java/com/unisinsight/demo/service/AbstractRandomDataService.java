@@ -10,7 +10,7 @@ public abstract class AbstractRandomDataService<T> extends AbstractDataService<T
     @Override
     public Future<?> dataProduct(BlockingQueue<T> blockingQueue, int start, int end) {
         List<Integer> order = new ArrayList<>(start);
-        for (int i = 1; i <= start; i ++) {
+        for (int i = 1; i <= end; i ++) {
             order.add(i);
         }
         Collections.shuffle(order);

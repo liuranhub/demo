@@ -44,7 +44,7 @@ public class PersonController {
         seqPersonInitDataService.execute(start, end);
     }
 
-    @PutMapping("random/init/{start}/{end}")
+    @PutMapping("random/update/{start}/{end}")
     public void updateData(@PathVariable Integer start, @PathVariable Integer end){
         randomUpdateDataService.execute(start, end);
     }

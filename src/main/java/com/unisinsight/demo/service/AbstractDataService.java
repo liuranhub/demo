@@ -6,24 +6,13 @@ import javax.annotation.Resource;
 import java.util.concurrent.*;
 
 public abstract class AbstractDataService<T> {
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(Constant.INIT_THREADS * 2);
+    static final ExecutorService executorService = Executors.newFixedThreadPool(Constant.INIT_THREADS * 2);
 
-    public void initData(int start, int end){
+    public void execute(int start, int end){
         long startTime = System.currentTimeMillis();
-        BlockingQueue<T> blockingQueue = new ArrayBlockingQueue<>(256);
+        BlockingQueue<T> blockingQueue = new ArrayBlockingQueue<>(1024);
 
-        Future<?> producer = executorService.submit(()->{
-            for (int i=start ;i <= end ;i ++) {
-
-                try {
-                    blockingQueue.put(create(i));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("producer" + Thread.currentThread().getName() + " finish");
-
-        });
+        Future<?> producer = dataProduct(blockingQueue, start, end);
 
         try {
             Thread.sleep(1000);
@@ -51,6 +40,7 @@ public abstract class AbstractDataService<T> {
         }
     }
 
+    abstract public Future<?> dataProduct(BlockingQueue<T> blockingQueue, int start, int end);
     public abstract T create(int index);
     public abstract void doing(T t);
 }

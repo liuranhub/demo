@@ -9,7 +9,7 @@ import javax.annotation.Resource;
  * 快速找到数据库中丢失编号
  * */
 @Service
-public class InitDataService<T> extends AbstractDataService<T> {
+public class SequenceInitDataService<T> extends AbstractSequenceDataService<T> {
 
     @Resource
     private ModelCreateSave<T> modelCreateSave;

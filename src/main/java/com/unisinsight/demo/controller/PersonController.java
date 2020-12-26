@@ -1,7 +1,8 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.service.PersonService;
-import com.unisinsight.demo.service.InitDataService;
+import com.unisinsight.demo.service.RandomUpdateDataService;
+import com.unisinsight.demo.service.SequenceInitDataService;
 import com.unisinsight.demo.support.sort.BubbleSort;
 import com.unisinsight.demo.support.sort.QuickSort;
 import com.unisinsight.demo.support.sort.Sort;
@@ -20,7 +21,10 @@ import java.util.Random;
 public class PersonController {
 
     @Resource
-    private InitDataService<Person> personInitDataService;
+    private SequenceInitDataService<Person> seqPersonInitDataService;
+
+    @Resource
+    private RandomUpdateDataService<Person> randomUpdateDataService;
 
 //    @Resource
     private PersonService personService;
@@ -35,9 +39,14 @@ public class PersonController {
        return personService.get(id);
     }
 
-    @PostMapping("init/{start}/{end}")
+    @PostMapping("seq/init/{start}/{end}")
     public void initData(@PathVariable Integer start, @PathVariable Integer end){
-        personInitDataService.initData(start, end);
+        seqPersonInitDataService.execute(start, end);
+    }
+
+    @PutMapping("random/init/{start}/{end}")
+    public void updateData(@PathVariable Integer start, @PathVariable Integer end){
+        randomUpdateDataService.execute(start, end);
     }
 
     @GetMapping("/invoke/sort/{type}/{size}")

@@ -1,7 +1,7 @@
 package com.unisinsight.demo.controller;
 
 import com.unisinsight.demo.model.Privilege;
-import com.unisinsight.demo.service.InitDataService;
+import com.unisinsight.demo.service.SequenceInitDataService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +14,10 @@ import javax.annotation.Resource;
 public class PrivilegeController {
 
     @Resource
-    private InitDataService<Privilege> initDataService;
+    private SequenceInitDataService<Privilege> initDataService;
 
     @PostMapping(value = "init/{start}/{end}")
     public void init(@PathVariable Integer start, @PathVariable Integer end){
-        initDataService.initData(start, end);
+        initDataService.execute(start, end);
     }
 }

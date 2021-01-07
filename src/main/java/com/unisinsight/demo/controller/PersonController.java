@@ -1,8 +1,9 @@
 package com.unisinsight.demo.controller;
 
-import com.unisinsight.demo.service.PersonService;
-import com.unisinsight.demo.service.RandomUpdateDataService;
-import com.unisinsight.demo.service.SequenceInitDataService;
+import com.unisinsight.demo.service.AbstractRandomDataService;
+import com.unisinsight.demo.service.AbstractSequenceDataService;
+import com.unisinsight.demo.service.PersonRandomUpdateDataService;
+import com.unisinsight.demo.service.PersonSequenceInitDataService;
 import com.unisinsight.demo.support.sort.BubbleSort;
 import com.unisinsight.demo.support.sort.QuickSort;
 import com.unisinsight.demo.support.sort.Sort;
@@ -21,23 +22,13 @@ import java.util.Random;
 public class PersonController {
 
     @Resource
-    private SequenceInitDataService<Person> seqPersonInitDataService;
+    private PersonSequenceInitDataService seqPersonInitDataService;
 
     @Resource
-    private RandomUpdateDataService<Person> randomUpdateDataService;
-
-//    @Resource
-    private PersonService personService;
-
-    //        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
-//        String json = JSON.toJSONString(root);
+    private PersonRandomUpdateDataService randomUpdateDataService;
 
     private static final Logger LOG = LoggerFactory.getLogger(PersonController.class);
 
-    @GetMapping("{id}")
-    public Person get(@PathVariable Integer id){
-       return personService.get(id);
-    }
 
     @PostMapping("seq/init/{start}/{end}")
     public void initData(@PathVariable Integer start, @PathVariable Integer end){

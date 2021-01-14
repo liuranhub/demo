@@ -27,7 +27,13 @@ public class FourArithmetic {
 
     public static float doing(String line){
 
-        getArray(line);
+        List<String> list = getArray(line);
+
+        for (String ele : list) {
+            
+        }
+
+
 
         return 0f;
     }

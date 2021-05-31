@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
 
 @RestController
 @RequestMapping(value = "test")
@@ -20,7 +21,16 @@ public class TestController {
             d += Math.sqrt(1);
         }
         LOG.info("success");
+
+        ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<String>(10);
+
         return "success";
+
+    }
+
+    @GetMapping(value = "hello")
+    public String get(){
+        return "hello world";
     }
 
 }

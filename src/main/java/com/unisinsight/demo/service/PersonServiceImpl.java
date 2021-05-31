@@ -9,16 +9,10 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
-public class PersonServiceImpl implements PersonService , ModelCreateSave<Person>{
+public class PersonServiceImpl implements ModelCreateSave<Person>{
 
     @Resource
     private PersonRepository personRepository;
-
-
-    @Override
-    public Person get(Integer id) {
-        return personRepository.getOne(id);
-    }
 
     @Override
     public Person create(int index) {

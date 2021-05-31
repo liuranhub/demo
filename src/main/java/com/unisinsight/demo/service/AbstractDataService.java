@@ -1,12 +1,18 @@
 package com.unisinsight.demo.service;
 
 import com.unisinsight.demo.config.Constant;
+import com.unisinsight.demo.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.util.concurrent.*;
 
 public abstract class AbstractDataService<T> {
     static final ExecutorService executorService = Executors.newFixedThreadPool(Constant.INIT_THREADS * 2);
+
+    abstract T create(int index);
+
+    abstract void doing(T o);
 
     public void execute(int start, int end){
         long startTime = System.currentTimeMillis();
@@ -41,6 +47,4 @@ public abstract class AbstractDataService<T> {
     }
 
     abstract public Future<?> dataProduct(BlockingQueue<T> blockingQueue, int start, int end);
-    public abstract T create(int index);
-    public abstract void doing(T t);
 }

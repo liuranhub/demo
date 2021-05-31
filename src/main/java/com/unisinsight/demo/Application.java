@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 @EnableAspectJAutoProxy
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class);
+        System.setProperty("proxyHost", "10.208.10.253");
+        System.setProperty("proxyPort",  "8080");
+        System.setProperty("proxyUser", "liuran");
+        System.setProperty("proxyPassword", "UNIs@172");
 
-//        FileToJson.TreeNode root = FileToJson.readFile("/Users/liuran/Desktop/test.json");
-//        String json = JSON.toJSONString(root);
-//        Supplier<Long> val =  memoize(()->90L);
-//        val.get()
+        SpringApplication.run(Application.class);
     }
 
     public static int ip2Int(String ip) {

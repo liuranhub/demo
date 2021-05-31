@@ -5,27 +5,45 @@ import java.util.List;
 
 public class TrieNode {
     private final char value;
-    private List<TrieNode> children;
+    private final List<TrieNode> children = new ArrayList<>();
     private final TrieNode parent;
     private boolean isEnd;
 
-    public TrieNode(char value, boolean isEnd, TrieNode parent){
+    public TrieNode(char value, TrieNode parent){
         this.value = value;
-        this.isEnd = isEnd;
         this.parent = parent;
+        this.isEnd = false;
     }
-
 
     public void addWord(String word){
+        if (word == null || word.length() < 1) {
+            return;
+        }
+        boolean isEnd = word.length() == 1;
+        char firstWord = word.charAt(0);
+        TrieNode child = getChildByValue(firstWord, isEnd);
 
+        String wordSubStr = word.substring(1);
+        if (wordSubStr.length() > 0){
+            child.addWord(wordSubStr);
+        }
     }
 
-    public void addChild(char value, boolean isEnd) {
-        if (children == null) {
-            children = new ArrayList<>();
+    private TrieNode getChildByValue(char value, boolean isEnd){
+        TrieNode node = null;
+        for (TrieNode ctn : children) {
+            if (ctn.value == value) {
+                node = ctn;
+            }
         }
-
-        children.add(new TrieNode(value, isEnd, this));
+        if(node == null) {
+            node = new TrieNode(value, this);
+            children.add(node);
+        }
+        if (isEnd) {
+            node.isEnd = true;
+        }
+        return node;
     }
 
     public String getFullWord(){
@@ -61,7 +79,6 @@ public class TrieNode {
         if (target.length() < 1 || children == null) {
             return null;
         }
-
         for (TrieNode child : children) {
             TrieNode result = child.match(target);
             if(result != null) {

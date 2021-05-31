@@ -76,7 +76,7 @@ public class TrieNode {
     }
 
     private TrieNode matchChildren(String target) {
-        if (target.length() < 1 || children == null) {
+        if (target.length() < 1) {
             return null;
         }
         for (TrieNode child : children) {

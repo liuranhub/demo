@@ -28,21 +28,6 @@ public class RedisTestController {
 
     @PostMapping
     public void test(){
-//        Lock lock = redisLock.crateLock("testPttl");
-//        lock.lock();
-//
-//        new Thread(()-> {
-//                Lock lock2 = redisLock.crateLock("testPttl");
-//                lock2.lock();
-//                lock2.unlock();
-//            }).start();
-//        try {
-//            Thread.sleep( 10000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        lock.unlock();
-
         CasLock lock = new CasLock();
         sum  = 0;
         CountDownLatch countDownLatch = new CountDownLatch(20);
@@ -61,7 +46,6 @@ public class RedisTestController {
                 }
             }).start();
         }
-//
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
